@@ -1,7 +1,7 @@
 """A transient, input-transparent paper crumple and ballistic throw overlay."""
 import math
 from PySide6.QtCore import QPointF, QRectF, Qt, QElapsedTimer, QTimer
-from PySide6.QtGui import QColor, QPainter, QPainterPath, QPen, QPolygonF, QTransform, QLinearGradient
+from PySide6.QtGui import QColor, QPainter, QPainterPath, QPainterPathStroker, QPen, QPolygonF, QTransform, QLinearGradient
 from PySide6.QtWidgets import QWidget
 
 
@@ -52,6 +52,7 @@ class PaperToss(QWidget):
         self.setAttribute(Qt.WidgetAttribute.WA_DeleteOnClose)
         self.setGeometry(screen_area)
         self.texture = texture
+        self.paper_color = texture.toImage().pixelColor(texture.width()-8, texture.height()//2)
         self.origin = QRectF(origin.translated(-screen_area.topLeft()))
         self.start = self.origin.center()
         self.end = QPointF(67, self.height()-91)
@@ -79,6 +80,10 @@ class PaperToss(QWidget):
                 self.vertices.append((QPointF(i/n*self.texture.width(), j/n*self.texture.height()),
                                       QPointF(self.origin.left()+i/n*self.origin.width(),
                                               self.origin.top()+j/n*self.origin.height()), ball))
+        self.boundary = (list(range(n+1)) +
+                         [j*(n+1)+n for j in range(1,n+1)] +
+                         list(range(n*(n+1)+n-1,n*(n+1)-1,-1)) +
+                         [j*(n+1) for j in range(n-1,0,-1)])
         self.triangles = []
         for j in range(n):
             for i in range(n):
@@ -164,13 +169,23 @@ class PaperToss(QWidget):
             y = (flat.y()-self.start.y())*(1-fold)+ball.y()*fold
             targets.append(QPointF(center.x()+(x*cos-y*sin)*scale,
                                    center.y()+(x*sin+y*cos)*scale))
+        # A continuous opaque backing prevents the desktop showing through
+        # antialiased triangle seams (especially visible on dark backgrounds).
+        silhouette = QPainterPath()
+        silhouette.addPolygon(QPolygonF([targets[i] for i in self.boundary]))
+        silhouette.closeSubpath()
+        p.fillPath(silhouette, self.paper_color)
+        p.save()
+        p.setClipPath(silhouette)
+        seam = QPainterPathStroker()
+        seam.setWidth(1.5)
         for index, ids in enumerate(self.triangles):
             src = [self.vertices[i][0] for i in ids]
             dst = [targets[i] for i in ids]
             polygon = QPolygonF(dst)
             p.save()
             clip = QPainterPath();clip.addPolygon(polygon);clip.closeSubpath()
-            p.setClipPath(clip)
+            p.setClipPath(clip.united(seam.createStroke(clip)), Qt.ClipOperation.IntersectClip)
             p.setTransform(affine(src,dst),True)
             p.drawPixmap(0,0,self.texture)
             p.restore()
@@ -179,6 +194,7 @@ class PaperToss(QWidget):
             p.setPen(Qt.PenStyle.NoPen)
             p.setBrush(QColor(255,255,255,int((shade+1)*30*fold)))
             p.drawPolygon(polygon)
+        p.restore()
 
     def paintEvent(self, event):
         p=QPainter(self)
