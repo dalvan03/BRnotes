@@ -19,6 +19,7 @@ que se recolhem nas bordas da tela. Criado e testado no **Fedora KDE Plasma**.
 - **Uma nota a cada atalho:** `Meta + Shift + N` abre uma nova janela independente.
 - **Sem moldura ou barra de título:** apenas o papel, o seletor de cores e o ×.
 - **Aparência de papel:** topo colado, degradê suave, base levemente curva e sombra difusa.
+- **Descarte especial:** segure o × por mais de um segundo e solte para amassar e arremessar o papel em uma lixeira.
 - **Animações suaves:** abertura, fechamento, recolhimento e restauração em 160–240 ms.
 - **Sete cores:** vermelho, laranja, amarelo, verde, azul, anil e violeta em tons suaves.
 - **Mover e redimensionar:** arraste o espaço vazio acima do texto ou os limites da nota.
@@ -34,6 +35,22 @@ A nota aparece com expansão suave, se recolhe até a aba, cresce novamente ao
 reabrir e desaparece com uma leve contração ao fechar.
 
 ![Demonstração das animações reais do BRnotes](docs/images/animacoes.gif)
+
+## Um papel que vai para a lixeira
+
+Um **clique rápido no ×** mantém o fechamento suave. **Segure o botão esquerdo
+no × por mais de um segundo e solte sobre ele** para a animação especial:
+
+1. Uma lixeirinha sobe no canto inferior esquerdo do monitor da nota.
+2. A nota se amassa em uma bolinha, preservando sua cor e a textura do texto.
+3. A bolinha gira e segue um arco com gravidade constante até a abertura.
+4. O papel cai dentro da lixeira, que reage ao impacto e desce para fora da tela.
+
+Um anel no × indica o tempo da pressão. Soltar fora do botão cancela. O efeito
+não intercepta cliques no desktop, não cria arquivos na lixeira do sistema e
+respeita `BRNOTES_REDUCED_MOTION=1`, usando o fechamento direto nesse modo.
+
+![Papel se amassando e sendo arremessado na lixeira](docs/images/lixeira.gif)
 
 ## Sete cores, um círculo
 
@@ -113,6 +130,7 @@ posição das janelas e das abas; uma sessão sem XWayland não é compatível.
 | Redimensionar | Arraste os cantos ou limites externos |
 | Recolher | Solte próximo a uma borda da área útil do monitor |
 | Reabrir | Clique na pequena aba colorida |
+| Descartar com animação especial | Segure o **×** por mais de 1 segundo e solte sobre ele |
 | Descartar | Clique no **×**; não há confirmação nem salvamento |
 
 Arrastar dentro do editor seleciona texto. O aplicativo não implementa
@@ -169,7 +187,8 @@ xvfb-run -a -s '-screen 0 1920x1080x24' python3 -m unittest discover -s . -v
 ```
 
 A suíte cobre edição, colagem, movimento, redimensionamento, recolhimento nas
-quatro bordas, restauração, cores independentes e o instalador. A CI usa um
+quatro bordas, restauração, cores independentes, clique curto/longo, cancelamento do descarte, trajetória física,
+limpeza da animação e o instalador. A CI usa um
 servidor X virtual; ela não substitui a verificação do atalho físico no Plasma.
 
 ## Limitações conhecidas

@@ -43,7 +43,7 @@ def install(no_shortcut=False):
         print('Aviso: sessão X11/XWayland não detectada; execute em uma sessão gráfica para usar o app.')
     target = DATA / 'brnotes'
     target.mkdir(parents=True, exist_ok=True)
-    for source, name in [('notas.py', 'brnotes.py'), ('LICENSE', 'LICENSE'), ('manage.py', 'manage.py')]:
+    for source, name in [('notas.py', 'brnotes.py'), ('paper_toss.py', 'paper_toss.py'), ('LICENSE', 'LICENSE'), ('manage.py', 'manage.py')]:
         src = Path(__file__).resolve().parent / source
         # The installed copy is intended for uninstall only.
         shutil.copy2(src, target / name)
@@ -96,7 +96,7 @@ def uninstall():
             pass
     for path in [DATA / 'kglobalaccel' / APP_ID, DATA / 'applications' / APP_ID,
                  DATA / 'brnotes' / 'brnotes.py', DATA / 'brnotes' / 'LICENSE',
-                 DATA / 'brnotes' / 'manage.py']:
+                 DATA / 'brnotes' / 'manage.py', DATA / 'brnotes' / 'paper_toss.py']:
         path.unlink(missing_ok=True)
     try:
         (DATA / 'brnotes').rmdir()

@@ -6,8 +6,8 @@ from PIL import Image, ImageFilter
 
 # Absolute positioning is needed for edge tabs, including on Plasma Wayland.
 os.environ['QT_QPA_PLATFORM'] = 'xcb'
-from PySide6.QtCore import QPoint, QRect, QSize, QRectF, Qt, QPropertyAnimation, QParallelAnimationGroup, QEasingCurve, QTimer
-from PySide6.QtGui import QCursor, QGuiApplication, QColor, QIcon, QPixmap, QActionGroup, QPainter, QPainterPath, QLinearGradient, QImage, QConicalGradient
+from PySide6.QtCore import QPoint, QRect, QSize, QRectF, Qt, QPropertyAnimation, QParallelAnimationGroup, QEasingCurve, QTimer, QElapsedTimer
+from PySide6.QtGui import QCursor, QGuiApplication, QColor, QIcon, QPixmap, QActionGroup, QPainter, QPainterPath, QLinearGradient, QImage, QConicalGradient, QPen
 from PySide6.QtWidgets import QApplication, QWidget, QTextEdit, QPushButton, QMenu
 
 
@@ -28,6 +28,43 @@ COLORS = {
 }
 
 
+class CloseButton(QPushButton):
+    """Normal clicks close; a left-button hold over one second arms the toss."""
+    def __init__(self, parent):
+        super().__init__('×', parent)
+        self.hold_clock = QElapsedTimer()
+        self.held_long = False
+        self.feedback = QTimer(self)
+        self.feedback.setInterval(32)
+        self.feedback.timeout.connect(self.update)
+
+    def mousePressEvent(self, event):
+        if event.button() == Qt.MouseButton.LeftButton:
+            self.held_long = False
+            self.hold_clock.start()
+            self.feedback.start()
+        super().mousePressEvent(event)
+
+    def mouseReleaseEvent(self, event):
+        if event.button() == Qt.MouseButton.LeftButton:
+            self.held_long = self.hold_clock.isValid() and self.hold_clock.elapsed() > 1000
+            self.feedback.stop()
+            self.hold_clock.invalidate()
+        super().mouseReleaseEvent(event)
+        self.held_long = False
+        self.update()
+
+    def paintEvent(self, event):
+        super().paintEvent(event)
+        if self.isDown() and self.hold_clock.isValid():
+            progress = min(1, self.hold_clock.elapsed()/1000)
+            painter = QPainter(self)
+            painter.setRenderHint(QPainter.RenderHint.Antialiasing)
+            painter.setPen(QPen(QColor('#574934'), 1.5))
+            painter.drawArc(QRectF(self.rect()).adjusted(2,2,-2,-2),
+                            90*16, -int(360*16*progress))
+
+
 class Note(QWidget):
     def __init__(self, animated=False):
         self.animated = animated
@@ -43,10 +80,10 @@ class Note(QWidget):
         self.editor.setAcceptRichText(False)
         self.editor.setPlaceholderText('Escreva aqui…')
         self.editor.setFrameStyle(0)
-        self.close_button = QPushButton('×', self)
-        self.close_button.setToolTip('Fechar e descartar nota')
+        self.close_button = CloseButton(self)
+        self.close_button.setToolTip('Clique para fechar. Segure por mais de 1 segundo e solte para jogar na lixeira.')
         self.close_button.setAccessibleName('Fechar e descartar nota')
-        self.close_button.clicked.connect(self.close)
+        self.close_button.clicked.connect(self.request_close)
         self.color_button = QPushButton(self)
         wheel = QPixmap(64, 64)
         wheel.fill(Qt.GlobalColor.transparent)
@@ -151,6 +188,28 @@ class Note(QWidget):
         self.setGeometry(start)
         self.setWindowOpacity(0)
         self.transition(target, 1, self.editor.setFocus, 220)
+
+    def request_close(self):
+        if self._animation is not None or self._closing:
+            return
+        if self.close_button.held_long and self.animated:
+            from paper_toss import PaperToss
+            self.color_menu.hide()
+            self.close_button.hide()
+            self.color_button.hide()
+            paper = self.paper_rect().toAlignedRect()
+            texture = self.grab(paper)
+            # Normalize texture coordinates on high-DPI screens.
+            texture = texture.scaled(paper.size(), Qt.AspectRatioMode.IgnoreAspectRatio,
+                                     Qt.TransformationMode.SmoothTransformation)
+            texture.setDevicePixelRatio(1)
+            origin = paper.translated(self.pos())
+            self._closing = True
+            self._toss = PaperToss(texture, origin, self.screen().availableGeometry(), self.close)
+            self._toss.start_animation()
+            self.hide()
+        else:
+            self.close()
 
     def closeEvent(self, event):
         if self.animated and not self._closing:
