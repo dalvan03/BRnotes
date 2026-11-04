@@ -24,7 +24,7 @@ for i in range(int(toss.duration*40)+1):
 output=Path(__file__).parent/'images/lixeira.gif'
 frames[0].save(output,save_all=True,append_images=frames[1:],duration=25,loop=0)
 contact=Image.new('RGB',(1290,600),'#f0efeb')
-for i,t in enumerate([0,.55,.98,1.25,toss.impact-.06,toss.impact+.1]):
+for i,t in enumerate([0,(toss.CRUMPLE_START+toss.LAUNCH)/2,toss.LAUNCH-.02,toss.LAUNCH+.25,toss.impact-.06,toss.impact+.1]):
     contact.paste(frames[min(len(frames)-1,round(t*40))].resize((430,300)),((i%3)*430,(i//3)*300))
 contact.save('/tmp/brnotes-toss-contact.png')
 note.close();toss.close()

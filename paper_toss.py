@@ -37,7 +37,7 @@ def affine(source, target):
 
 class PaperToss(QWidget):
     CRUMPLE_START = .18
-    LAUNCH = 1.0
+    LAUNCH = CRUMPLE_START + .82 / 1.30  # 30% faster crumpling; flight unchanged.
     GRAVITY = 1900.0
 
     def __init__(self, texture, origin, screen_area, finished):
@@ -175,9 +175,9 @@ class PaperToss(QWidget):
             p.drawPixmap(0,0,self.texture)
             p.restore()
             shade = math.sin(index*2.4)
-            p.setPen(QPen(QColor(77,53,18,int(45*fold)),.65))
-            p.setBrush(QColor(255,255,255,int(shade*65*fold)) if shade>0 else
-                       QColor(58,39,15,int(-shade*95*fold)))
+            # Highlight folds without outlining or darkening the paper facets.
+            p.setPen(Qt.PenStyle.NoPen)
+            p.setBrush(QColor(255,255,255,int((shade+1)*30*fold)))
             p.drawPolygon(polygon)
 
     def paintEvent(self, event):
