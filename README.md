@@ -1,79 +1,81 @@
 # BRnotes
 
-**Uma ideia. Um atalho. Uma nota.**
+**One idea. One shortcut. One note.**
 
-Notas adesivas temporárias para Linux, com aparência de papel, sete cores e abas
-que se recolhem nas bordas da tela. Criado e testado no **Fedora KDE Plasma**.
+Temporary sticky notes for Linux, with a paper-like appearance, seven colors,
+and tabs that tuck into the edges of your screen. Built and tested on **Fedora KDE Plasma**.
 
 [![Tests](https://github.com/dalvan03/BRnotes/actions/workflows/tests.yml/badge.svg)](https://github.com/dalvan03/BRnotes/actions/workflows/tests.yml)
 [![License: MIT](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
 
-![Três notas BRnotes com aparência de papel e exemplos de uso](docs/images/brnotes.png)
+![Three BRnotes sticky notes showing the paper effect and example content](docs/images/brnotes.png)
 
-> **Notas descartáveis por escolha.** O aplicativo não salva o conteúdo:
-> fechar uma nota, encerrar seu processo ou sair da sessão descarta o texto.
-> Use para lembretes temporários, não para informações que precisa guardar.
+> **Disposable by design.** BRnotes does not save your notes. Closing a note,
+> terminating its process, or logging out discards its text.
+> Use it for temporary reminders, not information you need to keep.
 
-## Funcionalidades
+## Features
 
-- **Uma nota a cada atalho:** `Meta + Shift + N` abre uma nova janela independente.
-- **Sem moldura ou barra de título:** apenas o papel, o seletor de cores e o ×.
-- **Aparência de papel:** topo colado, degradê suave, base levemente curva e sombra difusa.
-- **Descarte especial:** segure o × por mais de um segundo e solte para amassar e arremessar o papel em uma lixeira.
-- **Animações suaves:** abertura, fechamento, recolhimento e restauração em 160–240 ms.
-- **Sete cores:** vermelho, laranja, amarelo, verde, azul, anil e violeta em tons suaves.
-- **Mover e redimensionar:** arraste o espaço vazio acima do texto ou os limites da nota.
-- **Recolher nas quatro bordas:** arraste até uma borda e deixe apenas uma pequena aba visível.
-- **Restaurar com um clique:** a aba reabre a nota com o texto e a cor preservados.
-- **Edição de texto:** escrever, selecionar, copiar, colar, desfazer e refazer.
-- **Sempre à mão:** notas ficam acima das janelas normais.
-- **Local e sem conta:** o aplicativo não faz requisições de rede nem grava o texto em arquivos.
+- **A new note with every shortcut:** `Meta + Shift + N` opens another independent window.
+- **No window frame or title bar:** just the paper, a color picker, and the × button.
+- **Paper-like appearance:** a glued top edge, a gentle gradient, a slightly curved bottom, and a soft shadow.
+- **Special disposal animation:** hold × for more than one second and release to crumple the paper and toss it into a bin.
+- **Smooth transitions:** opening, closing, folding, and restoring in 160–240 ms.
+- **Seven colors:** soft shades of red, orange, yellow, green, blue, indigo, and violet.
+- **Move and resize:** drag the empty area above the text or the note's edges.
+- **Fold into any screen edge:** drag a note to an edge to leave only a small tab visible.
+- **One-click restore:** click the tab to bring back the note with its text and color intact.
+- **Text editing:** type, select, copy, paste, undo, and redo.
+- **Always within reach:** notes stay above normal windows.
+- **Local, no account required:** the application makes no network requests and does not write note text to files.
 
-## Movimento que combina com papel
+## Motion that feels like paper
 
-A nota aparece com expansão suave, se recolhe até a aba, cresce novamente ao
-reabrir e desaparece com uma leve contração ao fechar.
+Notes gently expand when opened, shrink into a tab when folded, expand again
+when restored, and fade out with a slight contraction when closed.
 
-![Demonstração das animações reais do BRnotes](docs/images/animacoes.gif)
+![Actual BRnotes opening, folding, restoring, and closing animations](docs/images/animacoes.gif)
 
-## Um papel que vai para a lixeira
+## Crumple it and toss it away
 
-Um **clique rápido no ×** mantém o fechamento suave. **Segure o botão esquerdo
-no × por mais de um segundo e solte sobre ele** para a animação especial:
+A **quick click on ×** keeps the regular closing animation. **Hold the left mouse
+button on × for more than one second, then release over the button** for the special animation:
 
-1. Uma lixeirinha sobe no canto inferior esquerdo do monitor da nota.
-2. A nota se amassa em uma bolinha, preservando sua cor e a textura do texto.
-3. A bolinha gira e segue um arco com gravidade constante até a abertura.
-4. O papel cai dentro da lixeira, que reage ao impacto e desce para fora da tela.
+1. A small bin rises from the bottom-left corner of the note's monitor.
+2. The note crumples into a paper ball, retaining its color and text texture.
+3. The ball spins and follows a constant-gravity arc toward the opening.
+4. The paper drops inside; the bin reacts to the impact and slides off-screen.
 
-Um anel no × indica o tempo da pressão. Soltar fora do botão cancela. O efeito
-não intercepta cliques no desktop, não cria arquivos na lixeira do sistema e
-respeita `BRNOTES_REDUCED_MOTION=1`, usando o fechamento direto nesse modo.
+A ring around × indicates how long you have held the button. Releasing outside
+it cancels the action. The effect does not intercept desktop clicks or create
+files in your system trash. With `BRNOTES_REDUCED_MOTION=1`, the note closes
+directly instead.
 
-![Papel se amassando e sendo arremessado na lixeira](docs/images/lixeira.gif)
+![A note crumpling into a paper ball and flying into a bin](docs/images/lixeira.gif)
 
-## Sete cores, um círculo
+## Seven colors, one circle
 
-Clique no **círculo multicolorido ao lado do ×**. A cor é independente para cada
-nota e também aparece na aba recolhida. Novas notas começam amarelas.
+Click the **multicolored circle next to ×**. Each note has its own color,
+which also appears on its folded tab. New notes start yellow.
 
-![As sete cores do BRnotes](docs/images/cores.png)
+![The seven BRnotes colors](docs/images/cores.png)
 
-## Libere espaço sem perder a ideia
+## Clear some space without losing your idea
 
-Arraste a nota para a esquerda, direita, parte superior ou inferior da área útil
-do monitor. Ela se transforma em uma aba da mesma cor. Clique para reabrir.
-O espaço reservado aos painéis do KDE é respeitado.
+Drag a note to the left, right, top, or bottom of your monitor's available work
+area. It becomes a small tab in the same color. Click to reopen it.
+Space reserved for KDE panels is respected.
 
-![Sequência ilustrada com widgets reais: nota aberta, aba e nota restaurada](docs/images/bordas.png)
+![Real application widgets showing an open note, its folded tab, and the restored note](docs/images/bordas.png)
 
-*Imagens compostas a partir dos widgets reais do aplicativo, com textos fictícios.
-Para regenerá-las: `python3 docs/render_examples.py`.*
+*Images are composed from the application's actual widgets using fictional text.
+Example images currently contain Portuguese text. Regenerate the static examples
+with `python3 docs/render_examples.py`.*
 
-## Instalação no Fedora KDE
+## Install on Fedora KDE
 
-Requisitos: **Python 3.10+**, **PySide6/Qt 6**, **Pillow**, **X11 ou XWayland** e
-**KDE Plasma 6** para a configuração automática do atalho.
+Requirements: **Python 3.10+**, **PySide6/Qt 6**, **Pillow**, **X11 or XWayland**,
+and **KDE Plasma 6** for automatic shortcut configuration.
 
 ```bash
 sudo dnf install git python3-pyside6 python3-pillow xorg-x11-server-Xwayland glib2
@@ -83,30 +85,30 @@ cd BRnotes
 /usr/bin/python3 manage.py install
 ```
 
-Execute o instalador **sem sudo**. Ele instala somente para seu usuário e
-adiciona o BRnotes ao menu de aplicativos. O atalho padrão é configurado quando
-está disponível; combinações ocupadas por outro aplicativo não são substituídas.
-Atalhos do BRnotes já personalizados são preservados.
+Run the installer **without sudo**. It installs for your user only and adds
+BRnotes to the application menu. The default shortcut is configured if it is
+available; shortcuts already used by another application are not overwritten.
+Existing customized BRnotes shortcuts are preserved.
 
-Agora pressione **Meta + Shift + N**. A tecla Meta costuma ser a tecla Windows/Super.
+Now press **Meta + Shift + N**. Meta is usually the Windows/Super key.
 
-### Personalizar o atalho
+### Customize the shortcut
 
-Abra **Configurações do Sistema → Teclado → Atalhos**, procure **BRnotes** e
-escolha a combinação desejada. Se não aparecer, adicione o aplicativo BRnotes
-pelo seletor de aplicativos dessa tela.
+Open **System Settings → Keyboard → Shortcuts**, find **BRnotes**, and choose
+your preferred key combination. If it is not listed, add BRnotes using the
+application picker on that screen.
 
-Para instalar sem configurar o atalho automaticamente:
+To install without automatically configuring a shortcut:
 
 ```bash
 /usr/bin/python3 manage.py install --no-shortcut
 ```
 
-### Outras distribuições
+### Other distributions
 
-O alvo principal é Fedora KDE. Outras distribuições com Plasma 6 e XWayland
-podem funcionar, mas ainda não foram validadas manualmente. Instale os equivalentes
-das dependências acima ou use um ambiente virtual:
+Fedora KDE is the primary target. Other distributions with Plasma 6 and XWayland
+may work but have not yet been manually validated. Install the equivalents of
+the dependencies above, or use a virtual environment:
 
 ```bash
 python3 -m venv .venv
@@ -114,95 +116,96 @@ python3 -m venv .venv
 .venv/bin/python manage.py install
 ```
 
-Nesse caso, mantenha a pasta `.venv`: o lançador usa o interpretador que executou
-o instalador. GNOME/Wayland nativo, Windows e macOS não são alvos suportados.
-O BRnotes usa o backend XCB do Qt mesmo em sessões Wayland para controlar a
-posição das janelas e das abas; uma sessão sem XWayland não é compatível.
+Keep the `.venv` directory in that case: the launcher uses the interpreter that
+ran the installer. Native GNOME/Wayland, Windows, and macOS are not supported
+targets. BRnotes uses Qt's XCB backend even in Wayland sessions to control window
+and tab positioning; Wayland sessions without XWayland are not compatible.
 
-## Como usar
+## Usage
 
-| Ação | Como fazer |
+| Action | How |
 | --- | --- |
-| Nova nota | `Meta + Shift + N` ou abrir BRnotes pelo menu |
-| Escrever | Clique no texto |
-| Mudar cor | Clique no círculo multicolorido |
-| Mover | Arraste a região vazia acima do texto ou as margens |
-| Redimensionar | Arraste os cantos ou limites externos |
-| Recolher | Solte próximo a uma borda da área útil do monitor |
-| Reabrir | Clique na pequena aba colorida |
-| Descartar com animação especial | Segure o **×** por mais de 1 segundo e solte sobre ele |
-| Descartar | Clique no **×**; não há confirmação nem salvamento |
+| New note | Press `Meta + Shift + N` or launch BRnotes from the application menu |
+| Write | Click inside the text area |
+| Change color | Click the multicolored circle |
+| Move | Drag the empty area above the text or the margins |
+| Resize | Drag a corner or an outer edge |
+| Fold | Release near an edge of the monitor's available work area |
+| Restore | Click the small colored tab |
+| Discard with the special animation | Hold **×** for more than 1 second and release over it |
+| Discard | Click **×**; there is no confirmation or saving |
 
-Arrastar dentro do editor seleciona texto. O aplicativo não implementa
-sincronização, histórico, recuperação ou salvamento automático.
+Dragging inside the editor selects text. The application does not provide
+synchronization, history, recovery, or autosave.
 
-### Reduzir movimento
+### Reduce motion
 
-Para executar sem animações:
+To run without animations:
 
 ```bash
 BRNOTES_REDUCED_MOTION=1 /usr/bin/python3 notas.py
 ```
 
-## Atualizar e desinstalar
+## Update and uninstall
 
-Para atualizar a instalação a partir de uma cópia limpa do repositório:
+To update an installation from a clean checkout of the repository:
 
 ```bash
 git pull --ff-only
 /usr/bin/python3 manage.py install
 ```
 
-A atualização vale para novas notas; as já abertas continuam funcionando com a
-versão anterior, preservando seu conteúdo em memória.
+Updates apply to new notes. Notes that are already open keep running the previous
+version, preserving their content in memory.
 
-Para desinstalar, dentro do repositório:
+To uninstall from the repository directory:
 
 ```bash
 /usr/bin/python3 manage.py uninstall
 ```
 
-Sem o repositório, na instalação padrão:
+Without the repository, for a default installation:
 
 ```bash
 /usr/bin/python3 ~/.local/share/brnotes/manage.py uninstall
 ```
 
-O desinstalador remove o lançador, o atalho e os arquivos do aplicativo. Ele não
-encerra notas abertas nem remove dependências do sistema. As pastas seguem
-`XDG_DATA_HOME` quando essa variável está definida; por padrão, usam `~/.local/share`.
+The uninstaller removes the launcher, shortcut, and application files. It does
+not close open notes or remove system dependencies. Installation paths follow
+`XDG_DATA_HOME` when set, otherwise they use `~/.local/share`.
 
-## Desenvolvimento e testes
+## Development and testing
 
 ```bash
 /usr/bin/python3 notas.py
 /usr/bin/python3 -m unittest discover -s . -v
 ```
 
-Os testes de interface precisam de uma sessão gráfica e abrem janelas temporárias.
-Em ambiente sem desktop, use Xvfb:
+UI tests require a graphical session and open temporary windows.
+For a headless environment, use Xvfb:
 
 ```bash
 xvfb-run -a -s '-screen 0 1920x1080x24' python3 -m unittest discover -s . -v
 ```
 
-A suíte cobre edição, colagem, movimento, redimensionamento, recolhimento nas
-quatro bordas, restauração, cores independentes, clique curto/longo, cancelamento do descarte, trajetória física,
-limpeza da animação e o instalador. A CI usa um
-servidor X virtual; ela não substitui a verificação do atalho físico no Plasma.
+The suite covers editing, pasting, moving, resizing, folding at all four edges,
+restoring, independent colors, short and long clicks, canceled disposal,
+ballistic trajectories, animation cleanup, and the installer. CI runs on a
+virtual X server; it does not replace testing the physical keyboard shortcut
+in Plasma.
 
-## Limitações conhecidas
+## Known limitations
 
-- Duas abas podem se sobrepor quando soltas no mesmo ponto.
-- Desconectar monitores durante o uso não tem tratamento específico.
-- Escalas diferentes entre monitores e outros compositores precisam de validação.
-- Cada nota roda em um processo Python separado; muitas notas aumentam o uso de memória.
-- O texto fica na memória do processo. Isso não é uma promessa de isolamento de
-  dados em relação à área de transferência, swap ou ferramentas do sistema.
+- Tabs can overlap when dropped at the same location.
+- Disconnecting monitors during use is not specifically handled.
+- Mixed monitor scaling and other compositors need further validation.
+- Each note runs in its own Python process; opening many notes increases memory usage.
+- Text lives in process memory. This is not a guarantee of isolation from the
+  clipboard, swap, or system tools.
 
-## Comunidade
+## Community
 
-Encontrou um problema ou tem uma ideia? [Abra uma issue](https://github.com/dalvan03/BRnotes/issues).
-Pull requests são bem-vindos; veja [como contribuir](CONTRIBUTING.md).
+Found a bug or have an idea? [Open an issue](https://github.com/dalvan03/BRnotes/issues).
+Pull requests are welcome; see the [contribution guide](CONTRIBUTING.md) (currently in Portuguese).
 
-**Licença [MIT](LICENSE)** — use, modifique e compartilhe, mantendo o aviso da licença.
+**[MIT license](LICENSE)** — use, modify, and share while retaining the license notice.
