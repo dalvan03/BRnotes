@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<component type="desktop-application">
+  <id>io.github.dalvan03.BRnotes</id>
+  <metadata_license>CC0-1.0</metadata_license>
+  <project_license>MIT</project_license>
+  <name>BRnotes</name>
+  <summary>Disposable sticky notes with screen-edge tabs</summary>
+  <developer id="io.github.dalvan03"><name>Dalvan and BRnotes contributors</name></developer>
+  <description>
+    <p>BRnotes provides temporary, colorful sticky notes for KDE Plasma. Move and resize each note, choose from seven colors, and tuck notes into screen-edge tabs.</p>
+    <p>Notes have a paper-like appearance and animated transitions. Hold the close button to crumple a note and toss it into a bin. Reduced motion is available.</p>
+    <p>Notes are never saved. Closing a note or logging out discards its text. The application requires X11 or XWayland, including in Plasma Wayland sessions.</p>
+  </description>
+  <launchable type="desktop-id">brnotes.desktop</launchable>
+  <url type="homepage">https://github.com/dalvan03/BRnotes</url>
+  <url type="bugtracker">https://github.com/dalvan03/BRnotes/issues</url>
+  <provides><binary>brnotes</binary></provides>
+  <screenshots><screenshot type="default">
+    <caption>Three notes showing the paper effect and example content</caption>
+    <image>https://raw.githubusercontent.com/dalvan03/BRnotes/main/docs/images/brnotes.png</image>
+  </screenshot></screenshots>
+  <content_rating type="oars-1.1"/>
+  <releases><release version="0.1.0" date="2026-11-05"/></releases>
+</component>

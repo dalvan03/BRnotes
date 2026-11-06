@@ -72,6 +72,12 @@ Space reserved for KDE panels is respected.
 Example images currently contain Portuguese text. Regenerate the static examples
 with `python3 docs/render_examples.py`.*
 
+## Fedora RPM packaging
+
+An RPM spec, AppStream metadata, desktop integration and Copr build recipe are
+available in [packaging/README.md](packaging/README.md). You can build a local RPM
+or source RPM. A public Copr repository has not yet been announced.
+
 ## Install on Fedora KDE
 
 Requirements: **Python 3.10+**, **PySide6/Qt 6**, **Pillow**, **X11 or XWayland**,

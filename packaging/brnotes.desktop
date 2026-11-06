@@ -1,0 +1,12 @@
+[Desktop Entry]
+Type=Application
+Name=BRnotes
+Comment=Disposable sticky notes with screen-edge tabs
+Comment[pt_BR]=Notas temporárias com abas nas bordas da tela
+Exec=brnotes
+Icon=io.github.dalvan03.BRnotes
+Terminal=false
+Categories=Utility;TextEditor;
+Keywords=notes;sticky;paper;reminder;
+StartupNotify=false
+X-KDE-GlobalAccel-CommandShortcut=true
